@@ -36,6 +36,15 @@
     <%= form.date_field :graduation_date %>
   </div>
 
+# Portfolio_app Project added code
+  <div>
+    <%= form.label :image, "Upload Profile Picture:" %><br>
+    <%= form.file_field :image %><br>
+    <%= form.label :bio, 'Bio' %>:<br>
+    <%= form.text_area :bio, cols: 20, rows: 8 %><br>
+  </div>
+# End of added code
+
   <div>
     <%= form.submit %>
   </div>
