@@ -4,7 +4,7 @@
 
 <div id="students">
   <% @students.each do |student| %>
-    <%= render student %>
+    <%= render 'student', student: student %>
     <p>
       <%= link_to "Show this student", student %>
     </p>

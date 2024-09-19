@@ -1,4 +1,12 @@
 <div id="<%= dom_id student %>">
+
+  <p>
+    <% if student && student.image.attached? %> 
+      <%= image_tag url_for(student.image), size: "150x150", style: "float: top" %>
+    <% end %>
+  </p>
+
+
   <p>
     <strong>Name:</strong>
     <%= student.name %>
@@ -22,6 +30,11 @@
   <p>
     <strong>Graduation date:</strong>
     <%= student.graduation_date %>
+  </p>
+
+  <p>
+    <strong>Bio:</strong>
+    <%= student.bio %>
   </p>
 
 </div>

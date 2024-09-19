@@ -6,6 +6,8 @@ class CreateStudents < ActiveRecord::Migration[7.1]
       t.string :major
       t.string :minor
       t.date :graduation_date
+      t.text :bio
+      t.file :image
 
       t.timestamps
     end
