@@ -1,0 +1,24 @@
+﻿How to set up Docker, for windows and linux. 
+
+
+Windows:
+
+
+1. Download the application (docker Desktop) from the Docker website. 
+2. After you have downloaded the application, navigate to the folder where you are housing your image data. 
+   1. An image is like a lightweight version of an operating system that contains all the libraries, dependencies, and functionality to run an app within docker. 
+3. Start a terminal inside the directory where your image files are held.
+   1. By terminal, we mean Powershell.
+   2. docker build -t your-image-name .
+4. In some cases you can just use the interface in the application to start your docker container. 
+   1. Otherwise, use this command - docker run -d --name my-container -p 5000:5000 my-web-app
+   2. Remember to replace -name, my-container with your own names.
+Linux:
+1. For linux, the process is slightly different but it involved building directories for Docker within the terminal. The Docker website has a very thorough tutorial on setting it up for Linux. 
+   1. https://docs.docker.com/engine/install/ubuntu/
+2. If you are running on Ubuntu 24.04, you will need to run the following terminal commands 
+   1. sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+   2. sudo systemctl --user restart docker-desktop
+3. After the applications running, use the commands in the terminal, within the directory of the image:
+   1. docker build -t your-image-name .
+   2. docker run -d --name my-container -p 5000:5000 my-web-app
