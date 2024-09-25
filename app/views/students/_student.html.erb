@@ -3,6 +3,8 @@
   <p>
     <% if student && student.image.attached? %> 
       <%= image_tag url_for(student.image), size: "150x150", style: "float: top" %>
+    <% else %>
+      <%= image_tag 'DefaultProfilePicture.jpeg', size: "150x150", style: "float: top" %>
     <% end %>
   </p>
 
