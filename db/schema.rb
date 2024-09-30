@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_19_020713) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_30_194140) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_020713) do
     t.datetime "updated_at", null: false
     t.text "bio"
     t.boolean "has_image", default: false
+    t.index ["school_email"], name: "index_students_on_school_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
