@@ -1,0 +1,24 @@
+<%= form_with(url: students_path, method: :get, local: true, class: "form-inline") do |form| %>
+    <div>
+      <%= form.label :major, "Select Major", class: "form-label" %>
+      <%= form.select :major, options_for_select(Student::VALID_MAJORS), { prompt: "Any Major" }, name: 'search[major]', class: "form-control" %>
+    </div>
+  
+
+    <div>
+      <%= form.label :date_filter, "Before/After" %>
+      <%= form.select "search[date_filter]", options_for_select([['Before', 'before'], ['After', 'after']], @search_params[:date_filter]), prompt: "Before/After" %>
+      <%= form.label :graduation_date, "Graduation" %>
+      <%= form.date_field "search[graduation_date]", value: @search_params[:graduation_date] %>
+    </div>
+
+
+    <div>
+      <%= form.submit "Search", class: "btn btn-primary" %>
+    </div>
+
+  <% end %>
+  
+  <div>
+    <%= button_to "Show All", students_path, method: :get, params: { search: { major: "" } }, class: "btn btn-secondary", form_class: "form-inline" %>
+  </div>

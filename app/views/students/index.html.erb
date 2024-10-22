@@ -2,13 +2,44 @@
 
 <h1>Students</h1>
 
-<div id="students">
-  <% @students.each do |student| %>
-    <%= render 'student', student: student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
+<div>
+  <% if @students.empty? %>
+    <% if @search_params.empty? %>
+      <p> Please search for students to display results. </p>
+    <% else %>
+      <p> No Students found. </p>
+    <% end %>
+  <% else %>
+    <table>
+      <thread>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Major</th>
+          <th>Graduation Date</th>
+          <th>Actions</th>
+        </tr>
+      </thread>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td><%= student.first_name %></td>
+            <td><%= student.last_name %></td>
+            <td><%= student.major %></td>
+            <td><%= student.graduation_date.strftime('%B %d, %Y') %></td>
+            <td>
+              <%= link_to "Show this student", student %>
+              <%= link_to "Edit this student", edit_student_path(student) %>
+              <%= link_to "Delete the student", student, method: :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
 </div>
 
 <%= link_to "New student", new_student_path %>
+
+
+<%= render 'search_form', search_params: @search_params %>

@@ -3,8 +3,19 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
+    Rails.logger.info "Params: #{params.inspect}"
+ 
+    @search_params = params[:search] || {}
     @students = Student.all
+
+    Rails.logger.info "Search Params: #{@search_params.inspect}"
+
+    if @search_params[:major].present?
+      @students = @students.where(major: @search_params[:major])
+    end
+
   end
+
 
   # GET /students/1 or /students/1.json
   def show
@@ -18,6 +29,35 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
   end
+
+
+  # GET /students or /students.json
+  def index
+    @search_params = params[:search] || {}
+    
+    if @search_params.empty?
+      @students = []
+    else
+      @students = Student.all
+
+    if @search_params[:major].present? && @search_params[:major] != "Any Major"
+      @students = @students.where(major: @search_params[:major])
+    end
+
+    if @search_params[:date_filter].present? && @search_params[:graduation_date].present?
+      graduation_date = Date.parse(@search_params[:graduation_date]) rescue nil
+
+        if graduation_date
+          if @search_params[:date_filter] == 'before'
+            @students = @students.where('graduation_date < ?', graduation_date)
+          elsif @search_params[:date_filter] == 'after'
+            @students = @students.where('graduation_date > ?', graduation_date)
+          end
+        end
+      end
+    end
+  end
+
 
   # POST /students or /students.json
   def create
@@ -65,6 +105,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:name, :school_email, :major, :minor, :graduation_date, :bio, :image)
+      params.require(:student).permit(:name, :major, :minor, :graduation_date, :bio, :image)
     end
 end
